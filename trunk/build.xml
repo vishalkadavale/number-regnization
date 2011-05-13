@@ -34,11 +34,10 @@
 	<target name="copy" depends="jar">
 		<copy todir="dist">
 			 <fileset dir=".">
-			  	    <include name="t10k*.*"/>
-		  	    	<include name="train*.*"/>
 			 		<include name="60000_9.nn"/>
 			 </fileset>
 		</copy>
+		<unzip src="train_and_test.zip" dest="dist/"/>
 	</target>
 	<target name="build" depends="compile, jar, copy">
 	</target>
