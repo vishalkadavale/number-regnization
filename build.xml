@@ -35,6 +35,7 @@
 		<copy todir="dist">
 			 <fileset dir=".">
 			 		<include name="60000_9.nn"/>
+			 		<include name="run.bat"/>
 			 </fileset>
 		</copy>
 		<unzip src="train_and_test.zip" dest="dist/"/>
