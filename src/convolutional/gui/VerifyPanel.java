@@ -146,8 +146,8 @@ public class VerifyPanel extends JPanel {
 			JOptionPane.showMessageDialog(this, "Parse integer failed : " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "File read error : " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 	}
 
