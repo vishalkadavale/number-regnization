@@ -6,19 +6,29 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Log {
-	public static void main(String[] argu) {
-		Logger l = Logger.getLogger("log");
+	
+	
+	static Logger l = Logger.getLogger("log");
+	
+	static {
 		remove(l);
 		Logger p = l.getParent();
 		while (p != null) {
 			remove(p);
 			p = p.getParent();
 		}
-		
 		ConsoleHandler ch = new ConsoleHandler();
-		l.addHandler(ch);
 		ch.setLevel(Level.FINER);
-		l.info("This is a test.");
+		l.addHandler(ch);
+		l.setLevel(Level.FINER);	
+	}
+	
+	public static void log(String msg) {
+		l.fine(msg);
+	}
+	
+	public static void main(String[] argu) {
+		log("This is a test.");
 	}
 
 	private static void remove(Logger l) {

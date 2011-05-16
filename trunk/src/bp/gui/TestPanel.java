@@ -80,20 +80,10 @@ public class TestPanel extends JPanel {
 				// one is white, -one is black
 				input[i*29+j] = (panel.getGrid()[j][i] == true ? 1 : -1);
 			}
-			System.out.println();
-		}
-		
-		for (int i=0; i<29; i++) {
-			for (int j=0; j<29; j++) {
-				System.out.print(input[i*29 + j] + " ");
-			}
-			System.out.println();
 		}
 		
 		double[] actualOutputVector = cn.calculate(input);
 		int r = Utility.getMax(actualOutputVector);
-		System.out.println(Arrays.toString(actualOutputVector));
-		System.out.println("Get : " + r);
 		lblResult.setText("Get : " + String.valueOf(r));
 		txtResult.setText("");
 		output(actualOutputVector, r);
