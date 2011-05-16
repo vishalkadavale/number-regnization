@@ -19,7 +19,15 @@ public class SamplesReader {
 	public static void main(String[] argu) {
 		// train(1, 1000);
 		Convolutional cn = new Convolutional();
-		cn.getNN().load("60000_9.nn");
+		try {
+			cn.getNN().load("60000_9.nn");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for (int i=0; i<10; i++) {
 			train(cn, 60000, 1000, i);
 		}
