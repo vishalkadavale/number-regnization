@@ -21,6 +21,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import utility.Log;
+
 import convolutional.Convolutional;
 import convolutional.Utility;
 
@@ -97,6 +99,12 @@ public class VerifyPanel extends JPanel {
 		try {
 			int idx = Integer.valueOf(edtIndex.getText());
 			idx += delta;
+			if (idx >= count) {
+				idx = 0;
+			}
+			if (idx < 0) {
+				idx = count - 1;
+			}
 			edtIndex.setText(String.valueOf(idx));
 		} catch (RuntimeException e) {
 			JOptionPane.showMessageDialog(this, "Parse integer failed : " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -139,8 +147,8 @@ public class VerifyPanel extends JPanel {
 			JOptionPane.showMessageDialog(this, "Parse integer failed : " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Read file error : " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 	}
 
@@ -148,19 +156,19 @@ public class VerifyPanel extends JPanel {
 		double[] input = new double[29 * 29];
 		for (int i=0; i<29; i++) {
 			for (int j=0; j<29; j++) {
-				System.out.print(panel.getGrid()[j][i] == true ? "*" : " ");
 				// one is white, -one is black
 				input[i*29+j] = (panel.getGrid()[j][i] == true ? 1 : -1);
 			}
-			System.out.println();
 		}
 		
+		StringBuffer sb = new StringBuffer();
 		for (int i=0; i<29; i++) {
 			for (int j=0; j<29; j++) {
-				System.out.print(input[i*29 + j] + " ");
+				sb.append(input[i*29 + j]).append(" ");
 			}
-			System.out.println();
+			sb.append("\n");
 		}
+		Log.log(sb.toString());
 		
 		double[] actualOutputVector = cn.calculate(input);
 		int r = Utility.getMax(actualOutputVector);
