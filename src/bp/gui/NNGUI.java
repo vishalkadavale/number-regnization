@@ -43,7 +43,7 @@ public class NNGUI extends JDialog {
 	 * Create the dialog.
 	 */
 	public NNGUI() {
-		setBounds(100, 100, 633, 462);
+		setBounds(100, 100, 642, 482);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(0, 0, 617, 391);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -72,34 +72,35 @@ public class NNGUI extends JDialog {
 		tabbedPane.setTabPlacement(JTabbedPane.TOP);
 		
 		
-		verifyPanel = new VerifyPanel();
-		tabbedPane.addTab("Verify", null, verifyPanel);
-		
-		testPanel = new TestPanel();
-		tabbedPane.addTab("Test",null, testPanel);
-		// tabbedPane.addTab("Train",panel2);
-
-		
-//		tabbedPane.addTab("Test", null);
-//		tabbedPane.addTab("Train", null);
 		contentPanel.add(tabbedPane);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBounds(0, 391, 617, 33);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane);
+			buttonPane.setLayout(null);
+			
+			JLabel lblInfo = new JLabel("");
+			lblInfo.setBounds(10, 9, 240, 15);
+			buttonPane.add(lblInfo);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.setBounds(398, 5, 98, 23);
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setBounds(506, 5, 101, 23);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 		
+		verifyPanel = new VerifyPanel();
+		tabbedPane.addTab("Verify", null, verifyPanel);
+		
+		testPanel = new TestPanel();
+		tabbedPane.addTab("Test",null, testPanel);
 	}
 }

@@ -34,7 +34,7 @@ public class TestPanel extends JPanel {
 	public TestPanel() {
 		setLayout(null);
 
-		panel = new GridPanel();
+		panel = new GridPanel(false);
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(10, 10, 242, 242);
 		add(panel);
@@ -76,7 +76,6 @@ public class TestPanel extends JPanel {
 		double[] input = new double[29 * 29];
 		for (int i=0; i<29; i++) {
 			for (int j=0; j<29; j++) {
-				System.out.print(panel.getGrid()[j][i] == true ? "*" : " ");
 				// one is white, -one is black
 				input[i*29+j] = (panel.getGrid()[j][i] == true ? 1 : -1);
 			}

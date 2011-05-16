@@ -16,8 +16,10 @@ public class GridPanel extends JPanel implements MouseListener, MouseMotionListe
 		return this.grid;
 	}
 
-	public GridPanel() {
-		this.addMouseMotionListener(this);
+	public GridPanel(boolean readOnly) {
+		if (!readOnly) {
+			this.addMouseMotionListener(this);
+		}
 		clearGrid();
 		
 	}
@@ -94,13 +96,13 @@ public class GridPanel extends JPanel implements MouseListener, MouseMotionListe
 		safeSet(dx, dy);
 		safeSet(dx - 1 , dy - 1);
 		safeSet(dx , dy - 1);
-		safeSet(dx + 1 , dy - 1);
+	//	safeSet(dx + 1 , dy - 1);
 		safeSet(dx - 1 , dy);
-		safeSet(dx  , dy);
-		safeSet(dx + 1 , dy);
-		safeSet(dx - 1 , dy + 1);
-		safeSet(dx  , dy + 1);
-		safeSet(dx + 1 , dy + 1);
+	//	safeSet(dx  , dy);
+	//	safeSet(dx + 1 , dy);
+	//	safeSet(dx - 1 , dy + 1);
+	//	safeSet(dx  , dy + 1);
+	//	safeSet(dx + 1 , dy + 1);
 
 		this.repaint();
 	}

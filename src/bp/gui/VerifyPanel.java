@@ -47,7 +47,7 @@ public class VerifyPanel extends JPanel {
 	public VerifyPanel() {
 		setLayout(null);
 
-		panel = new GridPanel();
+		panel = new GridPanel(true);
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(10, 10, 242, 242);
 		add(panel);
