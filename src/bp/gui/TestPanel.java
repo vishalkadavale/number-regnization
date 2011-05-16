@@ -3,7 +3,6 @@ package bp.gui;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -17,9 +16,16 @@ import convolutional.*;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.Arrays;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
 
 public class TestPanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4775331159341713203L;
 
 	private GridPanel panel;
 	
@@ -27,7 +33,9 @@ public class TestPanel extends JPanel {
 	private JTextPane  txtResult;
 
 	private Convolutional cn = new Convolutional();
-
+	private JLabel lblNewLabel;
+	private static final String db = "60000_9.nn";
+	
 	/**
 	 * Create the panel.
 	 */
@@ -36,11 +44,11 @@ public class TestPanel extends JPanel {
 
 		panel = new GridPanel(false);
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(10, 10, 242, 242);
+		panel.setBounds(10, 34, 242, 242);
 		add(panel);
 
 		JButton btnReg = new JButton("Recgnize");
-		btnReg.setBounds(20, 262, 93, 23);
+		btnReg.setBounds(20, 282, 93, 23);
 		add(btnReg);
 		btnReg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -53,7 +61,7 @@ public class TestPanel extends JPanel {
 		add(lblResult);
 
 		txtResult = new JTextPane();
-		txtResult.setBounds(262, 46, 178, 206);
+		txtResult.setBounds(262, 34, 178, 242);
 		add(txtResult);
 
 		JButton btnClear = new JButton("Clear");
@@ -62,10 +70,21 @@ public class TestPanel extends JPanel {
 				panel.clear();
 			}
 		});
-		btnClear.setBounds(144, 262, 93, 23);
+		btnClear.setBounds(144, 282, 93, 23);
 		add(btnClear);
 		
-		cn.getNN().load("60000_9.nn");
+		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(10, 10, 242, 15);
+		add(lblNewLabel);
+		
+		try {
+			cn.getNN().load(db);
+			lblNewLabel.setText(db + " is loaded.");
+		} catch (FileNotFoundException e) {
+			lblNewLabel.setText(db + " cannot found.");
+		} catch (IOException e) {
+			lblNewLabel.setText(db + " cannot read. Exception " + e.getMessage());
+		}	
 	}
 
 	public void init() {

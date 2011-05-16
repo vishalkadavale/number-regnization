@@ -491,7 +491,7 @@ public class NeuralNetwork {
 		return (double)(2.0 * Math.random()) - 1.0;
 	}
 	
-	public void load(String file) {
+	public void load(String file) throws FileNotFoundException, IOException {
 		File f = new File(file);
 		
 		int[] length = new int[]{156, 7800, 125100, 1010};
@@ -513,9 +513,9 @@ public class NeuralNetwork {
 			dis.close();
 			fis.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw e;
 		}	
 	}
 }

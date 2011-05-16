@@ -3,11 +3,9 @@ package bp.gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -28,11 +26,17 @@ import convolutional.Utility;
 
 public class VerifyPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -164774702764574116L;
+
 	private GridPanel panel;
 	
 	private JLabel lblResult;
 	private JTextPane  txtResult;
-
+	private JLabel lblNewLabel;
+	
 	private Convolutional cn = new Convolutional();
 	private JTextField edtIndex;
 	private RandomAccessFile imageFile = null;
@@ -41,6 +45,8 @@ public class VerifyPanel extends JPanel {
 	
 	private boolean fileLoaded = false;
 	private int count;
+	private static final String db = "60000_9.nn";
+	
 	/**
 	 * Create the panel.
 	 */
@@ -49,11 +55,11 @@ public class VerifyPanel extends JPanel {
 
 		panel = new GridPanel(true);
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(10, 10, 242, 242);
+		panel.setBounds(10, 34, 242, 242);
 		add(panel);
 
 		JButton btnLeft = new JButton("<<");
-		btnLeft.setBounds(33, 262, 51, 23);
+		btnLeft.setBounds(33, 282, 51, 23);
 		add(btnLeft);
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -67,7 +73,7 @@ public class VerifyPanel extends JPanel {
 		add(lblResult);
 
 		txtResult = new JTextPane();
-		txtResult.setBounds(262, 46, 178, 206);
+		txtResult.setBounds(262, 34, 178, 242);
 		add(txtResult);
 
 		JButton btnRight = new JButton(">>");
@@ -77,17 +83,28 @@ public class VerifyPanel extends JPanel {
 				verify();
 			}
 		});
-		btnRight.setBounds(178, 262, 51, 23);
+		btnRight.setBounds(178, 282, 51, 23);
 		add(btnRight);
 		
 		edtIndex = new JTextField();
 		edtIndex.setHorizontalAlignment(SwingConstants.CENTER);
 		edtIndex.setText("0");
-		edtIndex.setBounds(94, 262, 66, 21);
+		edtIndex.setBounds(94, 282, 66, 21);
 		add(edtIndex);
 		edtIndex.setColumns(10);
 		
-		cn.getNN().load("60000_9.nn");
+		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(10, 10, 242, 15);
+		add(lblNewLabel);
+		
+		try {
+			cn.getNN().load(db);
+			lblNewLabel.setText(db + " is loaded.");
+		} catch (FileNotFoundException e) {
+			lblNewLabel.setText(db + " cannot found.");
+		} catch (IOException e) {
+			lblNewLabel.setText(db + " cannot read. Exception " + e.getMessage());
+		}
 		
 		fileLoaded = loadFiles();
 		if (fileLoaded) {

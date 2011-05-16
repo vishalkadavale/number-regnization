@@ -78,10 +78,6 @@ public class NNGUI extends JDialog {
 			buttonPane.setBounds(0, 391, 617, 33);
 			getContentPane().add(buttonPane);
 			buttonPane.setLayout(null);
-			
-			JLabel lblInfo = new JLabel("");
-			lblInfo.setBounds(10, 9, 240, 15);
-			buttonPane.add(lblInfo);
 			{
 				JButton okButton = new JButton("OK");
 				okButton.setBounds(398, 5, 98, 23);
