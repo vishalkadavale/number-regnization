@@ -38,8 +38,11 @@ public class VerifyPanel extends JPanel {
 	private RandomAccessFile labelFile = null;
 	
 	
+	private static final String db = "60000_9.nn";
+	
 	private boolean fileLoaded = false;
 	private int count;
+	private JLabel lblNewLabel;
 	/**
 	 * Create the panel.
 	 */
@@ -48,7 +51,7 @@ public class VerifyPanel extends JPanel {
 
 		panel = new GridPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(10, 10, 242, 242);
+		panel.setBounds(10, 46, 242, 206);
 		add(panel);
 
 		JButton btnLeft = new JButton("<<");
@@ -86,7 +89,18 @@ public class VerifyPanel extends JPanel {
 		add(edtIndex);
 		edtIndex.setColumns(10);
 		
-		cn.getNN().load("60000_9.nn");
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(10, 10, 242, 15);
+		add(lblNewLabel);
+		
+		try {
+			cn.getNN().load(db);
+			lblNewLabel.setText(db + " is loaded.");
+		} catch (FileNotFoundException e) {
+			lblNewLabel.setText(db + " cannot found.");
+		} catch (IOException e) {
+			lblNewLabel.setText(db + " cannot read. Exception " + e.getMessage());
+		}	
 		
 		fileLoaded = loadFiles();
 		if (fileLoaded) {

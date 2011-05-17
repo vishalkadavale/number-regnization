@@ -73,7 +73,7 @@ public class TestPanel extends JPanel {
 		btnClear.setBounds(144, 282, 93, 23);
 		add(btnClear);
 		
-		lblNewLabel = new JLabel("New label");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(10, 10, 242, 15);
 		add(lblNewLabel);
 		
