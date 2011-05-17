@@ -12,7 +12,15 @@ public class ReadTest {
 	 */
 	public static void main(String[] args) {
 		Convolutional cn = new Convolutional();
-		cn.getNN().load("5000.nn");
+		try {
+			cn.getNN().load("5000.nn");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ConvolutionalTester.test(cn, 1);
 	}
 }

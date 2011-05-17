@@ -1,5 +1,8 @@
 package convolutional;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class ConTest {
 
 	/**
@@ -7,7 +10,15 @@ public class ConTest {
 	 */
 	public static void main(String[] args) {
 		Convolutional cn = new Convolutional();
-		cn.getNN().load("60000_9.nn");
+		try {
+			cn.getNN().load("60000_9.nn");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ConvolutionalTester.test(cn, 10000);
 	}
 
